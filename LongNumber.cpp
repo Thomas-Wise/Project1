@@ -100,3 +100,21 @@ longNumber longNumber::operator=(float right)
 	return longNumber(tempNum, tempOflow, tempFrac);
 }
 
+ostream& operator<<(ostream& out, const longNumber& longNum)
+{
+	if (longNum.getOverflow() > 0)
+	{
+		out << "(" << longNum.getOverflow() << ")"
+			<< "(" << ULLONG_MAX << ")" << "+";
+	}
+	out << longNum.getNum() << "+" << longNum.getFraction();
+	return out;
+}
+
+istream& operator>>(istream& in, longNumber& longNum)
+{
+	float input;
+	in >> input;
+	longNum = input;
+	return in;
+}

@@ -7,8 +7,14 @@
 #ifndef LONG_NUMBER_H
 #define LONG_NUMBER_H
 
-#include <string>
 #include <climits>
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+using std::cin;
+using std::cout;
+using std::endl;
 
 class longNumber
 {
@@ -33,4 +39,8 @@ private:
 	unsigned long long int overflow;
 	float fraction;
 };
+
+ostream& operator<<(ostream& out, const longNumber& longNum);
+istream& operator>>(istream& in, longNumber& longNum);
+
 #endif
