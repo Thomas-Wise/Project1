@@ -8,22 +8,29 @@
 #define LONG_NUMBER_H
 
 #include <string>
-
-using std::string;
-using std::to_string;
+#include <climits>
 
 class longNumber
 {
 public:
 	longNumber(void);
-	longNumber(int x);
-	longNumber(string x);
+	longNumber(float x);
+	longNumber(unsigned long long int n, unsigned long long int oflow, float fraction);
 	longNumber(const longNumber& x);
-	string getNum(void) const;
+	unsigned long long int getNum(void) const;
+	unsigned long long int getOverflow(void) const;
+	float getFraction(void) const;
+	void setNum(unsigned long long int x);
+	void setOverflow(unsigned long long int x);
+	void setFraction(float x);
 	longNumber operator+(const longNumber& right);
+	longNumber operator+(float right);
 	longNumber operator=(const longNumber& right);
-private:
-	string num;
-};
+	longNumber operator=(float right);
 
+private:
+	unsigned long long int num;
+	unsigned long long int overflow;
+	float fraction;
+};
 #endif
