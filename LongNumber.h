@@ -2,7 +2,7 @@
 // Thomas Wise
 // COSC 2030
 // Project01
-// 24 Oct 2018
+// 26 Oct 2018
 
 #ifndef LONG_NUMBER_H
 #define LONG_NUMBER_H
@@ -29,11 +29,12 @@ public:
 	void setNum(unsigned long long int x);
 	void setOverflow(unsigned long long int x);
 	void setFraction(float x);
-	longNumber operator+(const longNumber& right);
+	bool operator>(const longNumber& right) const;
+	longNumber operator+(const longNumber& right) const;
 	longNumber operator+(float right);
+	longNumber operator-(const longNumber& right) const;
 	longNumber operator=(const longNumber& right);
 	longNumber operator=(float right);
-
 private:
 	unsigned long long int num;
 	unsigned long long int overflow;
