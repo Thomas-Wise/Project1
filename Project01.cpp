@@ -26,6 +26,10 @@ int main()
 	float maxW[2];
 	longNumber highDiffVal[2];
 	int highDiffDay[2];
+
+	// Initializes all of the non-longNumber values.
+	// All longNumbers are zero since they were created
+	// with no arguments.
 	for (day = 0; day < 14; day++)
 	{
 		minD[day] = FLT_MAX;
@@ -40,8 +44,10 @@ int main()
 		highDiffDay[week] = 0;
 	}
 
+	// Cycles through all 14 days and gets the data for all of them.
 	for (day = 0; day < 14; day++)
 	{
+		// Gets the previous day so getDailyData can compare delta readings per day
 		int prevD = 0;
 		if (day != 0)
 		{
@@ -51,6 +57,7 @@ int main()
 		getDailyData(day, countD[prevD], sumD[day], sumW[week], countD[day], countW[week], minD[day], minW[week], maxD[day], maxW[week], highDiffVal[week], highDiffDay[week]);
 	}
 
+	// Prints out data for all days and both weeks after all days have been completed.
 	cout << "Final Results:" << endl;
 	for (day = 0; day < 14; day++)
 	{

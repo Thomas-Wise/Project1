@@ -6,6 +6,7 @@
 
 #include "GetDailyData.h"
 
+// This takes user input to manipulate all of the data and display it to the user.
 void getDailyData(int day, longNumber& prevDCount, longNumber& sumD, longNumber& sumW, longNumber& countD, longNumber& countW, float& minD, float& minW, float& maxD, float& maxW, longNumber& highDiffVal, int highDiffDay)
 {
 	bool done = false;
@@ -13,29 +14,33 @@ void getDailyData(int day, longNumber& prevDCount, longNumber& sumD, longNumber&
 	float input;
 	string trash;
 	int week = day / 7;
-	cout << "Please enter blood sugar levels for day " << (day + 1) << ":" << endl;
-	while (!done)
+	cout << "Please enter blood sugar levels for day " << (day + 1) << "(d for daily summary, w for weekly summary, n to go to next day):" << endl;
+	while (!done) // Loops until user enters n or N
 	{
 		while (!done && !(cin >> input))
 		{
+			// This whole section deals with non-numeric entries, so displaying values and going
+			// to the next day will be here.
 			cin.clear();
 			cin >> command;
 			if (command == 'D' || command == 'd')
 			{
 				showDailySummary(day, sumD, countD, minD, maxD);
-				cout << "Please enter blood sugar levels for day " << (day + 1) << ":" << endl;
+				cout << "Please enter blood sugar levels for day " << (day + 1) << "(d for daily summary, w for weekly summary, n to go to next day):" << endl;
 			}
 			else if (command == 'W' || command == 'w')
 			{
 				showWeeklySummary(week, sumW, countW, minW, maxW, highDiffDay);
-				cout << "Please enter blood sugar levels for day " << (day + 1) << ":" << endl;
+				cout << "Please enter blood sugar levels for day " << (day + 1) << "(d for daily summary, w for weekly summary, n to go to next day):" << endl;
 			}
 			else if (command == 'N' || command == 'n')
 			{
 				showDailySummary(day, sumD, countD, minD, maxD);
 				done = true;
 				trash = "";
-				getline(cin, trash);
+				getline(cin, trash); // Empties cin so nothing entered after n can affect the next day's values.
+				//
+				// Handles the highest delta day part
 				if (day != 0 && day != 7)
 				{
 					if ((countD - prevDCount) > highDiffVal)
@@ -45,6 +50,7 @@ void getDailyData(int day, longNumber& prevDCount, longNumber& sumD, longNumber&
 				}
 			}
 		}
+		// Handles max and min values
 		if (!done)
 		{
 			if (input > 0)
@@ -74,6 +80,7 @@ void getDailyData(int day, longNumber& prevDCount, longNumber& sumD, longNumber&
 	}
 }
 
+// Shows user the daily summary so far.
 void showDailySummary(int day, longNumber& sum, longNumber& count, float& min, float& max)
 {
 	cout << endl << endl;
@@ -84,6 +91,7 @@ void showDailySummary(int day, longNumber& sum, longNumber& count, float& min, f
 	cout << "Max: " << max << endl << endl;
 }
 
+// Shows the user the weekly summary so far.
 void showWeeklySummary(int week, longNumber& sum, longNumber& count, float& min, float& max, int highDiffDay)
 {
 	cout << endl << endl;

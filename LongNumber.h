@@ -16,6 +16,10 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+
+// longNumber is a data type that stores three variables: num (basically a whole number), overflow, and fraction.
+// When fraction gets above one, num goes up by one and fraction goes down by one so fraction is always < 1.
+// When num rolls over, overflow is incremented by one. So it basically acts as one huge number.
 class longNumber
 {
 public:
